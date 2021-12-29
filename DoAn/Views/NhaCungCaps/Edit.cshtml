@@ -1,0 +1,52 @@
+﻿@model DoAn.Models.NhaCungCap
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>NhaCungCap</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="TenNCC" class="control-label"></label>
+                <input asp-for="TenNCC" class="form-control" />
+                <span asp-validation-for="TenNCC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Thongtinlienlac" class="control-label"></label>
+                <input asp-for="Thongtinlienlac" class="form-control" />
+                <span asp-validation-for="Thongtinlienlac" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Diachi" class="control-label"></label>
+                <input asp-for="Diachi" class="form-control" />
+                <span asp-validation-for="Diachi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SDT" class="control-label"></label>
+                <input asp-for="SDT" class="form-control" />
+                <span asp-validation-for="SDT" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TinhTrang" /> @Html.DisplayNameFor(model => model.TinhTrang)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

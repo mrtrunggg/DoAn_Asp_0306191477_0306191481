@@ -1,0 +1,96 @@
+﻿@model IEnumerable<DoAn.Models.HoaDon>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@using (Html.BeginForm("Index", "HoaDons"))
+{
+    <b>Tìm kiếm theo: </b> @Html.RadioButton("timkiemtheo", "tk")<text>Id tài khoản</text>
+    @*@Html.RadioButton("timkiemtheo", "ngaylaphd")<text>Ngày lập hóa đơn</text>
+        @Html.RadioButton("timkiemtheo", "ngaygiaohang")<text>Ngày giao hàng</text>*@
+    @Html.RadioButton("timkiemtheo", "Loaihd")<text>Loại hóa đơn</text>
+    @Html.RadioButton("timkiemtheo", "tongtien")<text>Tổng tiền</text>
+    @Html.RadioButton("timkiemtheo", "thongtinnguoinhan")<text>Thông tin người nhận</text>
+    @Html.RadioButton("timkiemtheo", "none", true)<text>None</text>
+    <br />
+    @Html.TextBox("onhap")
+    @Html.TextBox("onhap2")
+    <input type="submit" value="Tìm kiếm" />
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaiKhoan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayLapHD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayGiaoHang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoaiHD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TongTien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThongTinNguoiNhan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaiKhoan.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayLapHD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayGiaoHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiHD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThongTinNguoiNhan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    string username;
+    if (ViewBag.tendangnhap != null)
+    {
+        username = ViewBag.tendangnhap;
+    }
+    else {
+        username = "khack";
+    }
+}
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Ten dang nhap : @username</p>
+    <a asp-controller="TaiKhoans" asp-action="logout" class="btn-danger">logout</a>
+</div>

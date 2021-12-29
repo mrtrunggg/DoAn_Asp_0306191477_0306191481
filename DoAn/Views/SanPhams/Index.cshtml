@@ -1,0 +1,106 @@
+﻿@model IEnumerable<DoAn.Models.SanPham>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@using (Html.BeginForm("Index", "SanPhams"))
+{
+    <b>Tìm kiếm theo: </b> @Html.RadioButton("timkiemtheo", "masp")<text>Mã sản phẩm</text>
+    @Html.RadioButton("timkiemtheo", "tensp")<text>Tên sản phẩm</text>
+    @Html.RadioButton("timkiemtheo", "nhacungcap")<text>Nhà cung cấp</text>
+    @Html.RadioButton("timkiemtheo", "khoanggiatien")<text>Khoảng giá tiền</text>
+    @Html.RadioButton("timkiemtheo", "loaisp")<text>Loại sản phẩm</text>
+    @Html.RadioButton("timkiemtheo", "none", true)<text>None</text>
+    <br />
+    @Html.TextBox("onhap")
+    @Html.TextBox("onhapgiatricuoi")
+    <input type="submit" value="Tìm kiếm" />
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dongia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KichThuoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NhaCungCap_SanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoaiSP_SanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhAnh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dongia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MoTa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KichThuoc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NhaCungCap_SanPham.TenNCC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiSP_SanPham.TenLoaiSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HinhAnh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

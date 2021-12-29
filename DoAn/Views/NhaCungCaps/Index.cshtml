@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DoAn.Models.NhaCungCap>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@using (Html.BeginForm("Index", "NhaCungCaps"))
+{
+    <b>Tìm kiếm theo: </b> @Html.RadioButton("timkiemtheo", "tenNCC")<text>Tên nhà cung cấp</text>
+    @Html.RadioButton("timkiemtheo", "TTLL")<text>Thông tin liên lạc</text>
+    @Html.RadioButton("timkiemtheo", "diachi")<text>Địa chỉ</text>
+    @Html.RadioButton("timkiemtheo", "sdt")<text>Số điện thoại</text>
+    @Html.RadioButton("timkiemtheo", "none", true)<text>None</text>
+    <br />
+    @Html.TextBox("onhap")
+    <input type="submit" value="Tìm kiếm" />
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenNCC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Thongtinlienlac)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diachi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNCC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Thongtinlienlac)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Diachi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
