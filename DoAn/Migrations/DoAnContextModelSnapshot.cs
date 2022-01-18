@@ -50,6 +50,31 @@ namespace DoAn.Migrations
                     b.ToTable("CT_HoaDons");
                 });
 
+            modelBuilder.Entity("DoAn.Models.Giohang", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SanPhamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoLuong")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaiKhoanId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SanPhamId");
+
+                    b.HasIndex("TaiKhoanId");
+
+                    b.ToTable("Giohangs");
+                });
+
             modelBuilder.Entity("DoAn.Models.HoaDon", b =>
                 {
                     b.Property<int>("Id")
@@ -232,6 +257,21 @@ namespace DoAn.Migrations
                     b.HasOne("DoAn.Models.SanPham", "SanPham")
                         .WithMany("CT_HoaDons")
                         .HasForeignKey("SanPhamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DoAn.Models.Giohang", b =>
+                {
+                    b.HasOne("DoAn.Models.SanPham", "SanPham")
+                        .WithMany("Giohangs")
+                        .HasForeignKey("SanPhamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DoAn.Models.TaiKhoan", "TaiKhoan")
+                        .WithMany("Giohangs")
+                        .HasForeignKey("TaiKhoanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

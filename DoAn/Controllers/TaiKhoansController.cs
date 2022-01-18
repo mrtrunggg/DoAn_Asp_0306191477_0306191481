@@ -77,7 +77,7 @@ namespace DoAn.Controllers
         public async Task<IActionResult> login(string TenDangNhap, string MatKHau)
         {
 
-            TaiKhoan taikhoan = _context.TaiKhoan.Where(a => a.TenDangNhap == TenDangNhap && a.MatKHau == MatKHau).FirstOrDefault();
+            TaiKhoan taikhoan = _context.TaiKhoan.Where(a => a.TenDangNhap == TenDangNhap && a.MatKHau == MatKHau && a.LoaiTk=="Admin").FirstOrDefault();
 
             if (taikhoan != null)
             {
@@ -85,7 +85,7 @@ namespace DoAn.Controllers
                 HttpContext.Session.SetInt32("TaiKhoanId", taikhoan.Id);
                 HttpContext.Session.SetString("TaiKhoanTenDangNhap", taikhoan.TenDangNhap);
 
-                return RedirectToAction("TrangChu", "SanPhams");
+                return RedirectToAction("Index", "Admin");
             }
             else
             {
@@ -100,7 +100,7 @@ namespace DoAn.Controllers
         {
             HttpContext.Session.Remove("TaiKhoanId");
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("login", "Taikhoans");
         }
 
 

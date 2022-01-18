@@ -1,0 +1,70 @@
+﻿
+<h1>Giohang</h1>
+
+
+@model IEnumerable<DoAn.Models.Giohang>
+
+@{
+    ViewData["Title"] = "Giohang";
+    Layout = "~/Views/Shared/_Layout_user1.cshtml";
+    var listgh = ViewBag.ListGH;
+}
+
+
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Shopping Cart</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Sản phẩm</td>
+                        <td class="total">Tên sản phẩm</td>
+                        <td class="description">Tên tài khoản</td>
+                        <td class="price">Đơn giá</td>
+                        <td class="quantity">Số lượng</td>
+
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Giohang item in listgh)
+                    {
+                        <tr>
+                            <td class="cart_product">
+                                <a asp-action="CTSP" asp-route-id="@item.SanPham.Id"><img src="~/images/@Html.DisplayFor(modelItem => item.SanPham.HinhAnh)" alt="" width="100px" height="100px"></a>
+
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">@Html.DisplayFor(modelItem => item.SanPham.TenSp)</a></h4>
+
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">@Html.DisplayFor(modelItem => item.TaiKhoan.HoTen)</p>
+                            </td>
+                            <td class="cart_price">
+                                <p>@Html.DisplayFor(modelItem => item.SanPham.Dongia)</p>
+                            </td>
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    <a class="cart_quantity_up" href=""> + </a>
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="@Html.DisplayFor(modelItem => item.SoLuong)" autocomplete="off" size="2">
+                                    <a class="cart_quantity_down" href=""> - </a>
+                                </div>
+                            </td>
+                            <td class="cart_delete">
+                                <a class="cart_quantity_delete" asp-action="Delete" asp-route-id="@item.SanPham.Id"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section> <!--/#cart_items-->

@@ -10,7 +10,14 @@
 <div class="featured container no-gutter">
 
 
+    <div class="m-xl-n5">
+        @using (Html.BeginForm("DSSP", "Home"))
+        {
+            @Html.TextBox("onhap")
+        }
 
+    </div>
+       
     <div class="row posts" style="margin-top: 70px">
 
         @foreach (SanPham item in listsp)

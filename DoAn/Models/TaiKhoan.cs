@@ -20,5 +20,6 @@ namespace DoAn.Models
         public string HinhDaiDien { get; set; }
         public bool TinhTrang { get; set; }
         public List<HoaDon> HoaDons { get; set; }
+        public List<Giohang> Giohangs { get; set; }
     }
 }

@@ -20,5 +20,6 @@ namespace DoAn.Data
         public DbSet<NhaCungCap> NhaCungCaps { get; set; }
         public DbSet<SanPham> SanPhams { get; set; }
         public DbSet<TaiKhoan> TaiKhoan { get; set; }
+        public DbSet<Giohang> Giohangs { get; set; }
     }
 }
