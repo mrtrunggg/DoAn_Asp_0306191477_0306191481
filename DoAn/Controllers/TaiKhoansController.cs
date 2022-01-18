@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using DoAn.Data;
 using DoAn.Models;
 using Microsoft.AspNetCore.Http;
-
+using System.Security.Cryptography;
+using System.Text;
+using System.Web;
 namespace DoAn.Controllers
 {
     public class TaiKhoansController : Controller
@@ -79,6 +81,7 @@ namespace DoAn.Controllers
 
             if (taikhoan != null)
             {
+                
                 HttpContext.Session.SetInt32("TaiKhoanId", taikhoan.Id);
                 HttpContext.Session.SetString("TaiKhoanTenDangNhap", taikhoan.TenDangNhap);
 

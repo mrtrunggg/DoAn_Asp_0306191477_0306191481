@@ -53,6 +53,14 @@ namespace DoAn.Controllers
             return View();
         }
 
+        public IActionResult add_cart()
+        {
+            var sp = _context.SanPhams.ToList();
+            ViewBag.ListSP = sp;
+            return View();
+        }
+
+
         public async Task<IActionResult> CTSP(int? id)
         {
             if (id == null)
