@@ -1,0 +1,36 @@
+﻿
+<h1>Giohang</h1>
+
+@model DoAn.Models.HoaDon
+
+
+@{
+    ViewData["Title"] = "Pay";
+    Layout = "~/Views/Shared/_Layout_user.cshtml";
+    var listgh = ViewBag.ListGH;
+    TaiKhoan acc = ViewBag.Account;
+}
+
+
+<h3>Pay</h3>
+<h4>Invoice</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Pay" asp-controller="Home">
+            <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ThongTinNguoiNhan" class="control-label"></label>
+                <input asp-for="ThongTinNguoiNhan" class="form-control" value="@acc.DiaChi" />
+                <span asp-validation-for="ThongTinNguoiNhan" class="text-danger"></span>
+            </div>
+            <div class="mb-3">Tổng tiền: @ViewBag.CartsTotal.ToString("#,##0") VNĐ</div>
+            <br />
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Xác nhận</button>
+                <span>@ViewBag.ErrorMessage</span>
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+

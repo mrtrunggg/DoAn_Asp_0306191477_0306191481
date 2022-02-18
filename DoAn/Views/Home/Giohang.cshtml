@@ -6,16 +6,17 @@
 
 @{
     ViewData["Title"] = "Giohang";
-    Layout = "~/Views/Shared/_Layout_user1.cshtml";
+    Layout = "~/Views/Shared/_Layout_user.cshtml";
     var listgh = ViewBag.ListGH;
 }
 
 
 <section id="cart_items">
     <div class="container">
+        <li><a asp-action="DSSP">Sản phẩm</a></li>
         <div class="breadcrumbs">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
+
                 <li class="active">Shopping Cart</li>
             </ol>
         </div>
@@ -33,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Giohang item in listgh)
+                    @foreach (var item in Model)
                     {
                         <tr>
                             <td class="cart_product">
@@ -58,11 +59,11 @@
                                 </div>
                             </td>
                             <td class="cart_delete">
-                                <a class="cart_quantity_delete" asp-action="Delete" asp-route-id="@item.SanPham.Id"><i class="fa fa-times"></i></a>
+                                <a asp-action="RemoveCart" asp-route-id="@item.SanPham.Id" asp-controller="Home"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
                     }
-
+                    <a asp-action="RemoveAllCart" asp-controller="Home">Xóa toàn bộ giỏ hàng</a>
                 </tbody>
             </table>
         </div>

@@ -40,13 +40,16 @@
                     <h6>@Model.Dongia</h6>
                     <p>@Model.MoTa</p>
                     <span>@Model.SoLuong left on stock</span>
-                    <form action="" method="get">
+                    <form asp-action="themgiohang" asp-controller="Home">
                         <label for="quantity">Quantity:</label>
                         <input name="quantity" type="quantity" class="quantity-text" id="quantity"
                                onfocus="if(this.value == '1') { this.value = ''; }"
                                onBlur="if(this.value == '') { this.value = '1';}"
                                value="1">
-                        <input type="submit" class="button" value="Order Now!">
+                        <a asp-action="themgiohang" asp-route-id="@Model.Id" asp-controller="Home">
+                            Thêm vào giỏ hàng
+                        </a>
+                        
                     </form>
                     <div class="down-content">
                         <div class="categories">

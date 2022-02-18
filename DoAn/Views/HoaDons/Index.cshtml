@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<DoAn.Models.HoaDon>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout_admin.cshtml";
@@ -65,7 +64,7 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TaiKhoan.Id)
+                    @Html.DisplayFor(modelItem => item.TaiKhoanId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NgayLapHD)

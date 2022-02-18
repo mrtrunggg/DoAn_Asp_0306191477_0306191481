@@ -16,7 +16,6 @@ namespace DoAn.Models
         public int TongTien { get; set; }
         public string ThongTinNguoiNhan { get; set; }
         public bool TinhTrang { get; set; }
-
         public List<CT_HoaDon> CT_HoaDons { get; set; }
 
 
