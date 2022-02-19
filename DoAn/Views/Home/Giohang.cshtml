@@ -1,71 +1,95 @@
-﻿
-<h1>Giohang</h1>
-
-
-@model IEnumerable<DoAn.Models.Giohang>
-
+﻿@model IEnumerable<DoAn.Models.Giohang>
 @{
-    ViewData["Title"] = "Giohang";
-    Layout = "~/Views/Shared/_Layout_user.cshtml";
+    ViewData["Title"] = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
     var listgh = ViewBag.ListGH;
+
+    if (ViewBag.tendangnhap != null)
+    {
+        ViewData["Account"] = ViewBag.tendangnhap;
+    }
+    else
+    {
+        ViewData["Account"] = "Tài khoản";
+    }
+    TaiKhoan acc = ViewBag.taikhoan;
+
 }
 
-
-<section id="cart_items">
+<section class="page-header">
     <div class="container">
-        <li><a asp-action="DSSP">Sản phẩm</a></li>
-        <div class="breadcrumbs">
-            <ol class="breadcrumb">
-
-                <li class="active">Shopping Cart</li>
-            </ol>
-        </div>
-        <div class="table-responsive cart_info">
-            <table class="table table-condensed">
-                <thead>
-                    <tr class="cart_menu">
-                        <td class="image">Sản phẩm</td>
-                        <td class="total">Tên sản phẩm</td>
-                        <td class="description">Tên tài khoản</td>
-                        <td class="price">Đơn giá</td>
-                        <td class="quantity">Số lượng</td>
-
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td class="cart_product">
-                                <a asp-action="CTSP" asp-route-id="@item.SanPham.Id"><img src="~/images/@Html.DisplayFor(modelItem => item.SanPham.HinhAnh)" alt="" width="100px" height="100px"></a>
-
-                            </td>
-                            <td class="cart_description">
-                                <h4><a href="">@Html.DisplayFor(modelItem => item.SanPham.TenSp)</a></h4>
-
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">@Html.DisplayFor(modelItem => item.TaiKhoan.HoTen)</p>
-                            </td>
-                            <td class="cart_price">
-                                <p>@Html.DisplayFor(modelItem => item.SanPham.Dongia)</p>
-                            </td>
-                            <td class="cart_quantity">
-                                <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href=""> + </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity" value="@Html.DisplayFor(modelItem => item.SoLuong)" autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href=""> - </a>
-                                </div>
-                            </td>
-                            <td class="cart_delete">
-                                <a asp-action="RemoveCart" asp-route-id="@item.SanPham.Id" asp-controller="Home"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
-                    }
-                    <a asp-action="RemoveAllCart" asp-controller="Home">Xóa toàn bộ giỏ hàng</a>
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content">
+                    <h1 class="page-name">Giỏ hàng</h1>
+                    <ol class="breadcrumb">
+                        <li><a asp-action="Index">Trang chủ</a></li>
+                        <li class="active">giỏ hàng</li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
-</section> <!--/#cart_items-->
+</section>
+
+<div class="page-wrapper">
+    <div class="cart shopping">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="block">
+                        <div class="product-list">
+                            <form method="post">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="">Sản phẩm</th>
+                                            <th class="">Đơn giá</th>
+                                            <th class="">Số lượng</th>
+                                            <th class=""></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr class="">
+                                                <td class="">
+                                                    <div class="product-info">
+                                                        <img width="80" src="~/user/images/shop/products/@Html.DisplayFor(modelItem => item.SanPham.HinhAnh)" alt="" />
+                                                        <a asp-action="CTSP" asp-route-id="@item.SanPham.Id">@Html.DisplayFor(modelItem => item.SanPham.TenSp)</a>
+                                                    </div>
+                                                </td>
+                                                <td class="">@Html.DisplayFor(modelItem => item.SanPham.Dongia) VNĐ</td>
+                                                <td class="">
+                                                    <div class="col-md-6">
+                                                        <div class="product-quantity-slider">
+                                                            <input id="product-quantity" type="text" value="@Html.DisplayFor(modelItem => item.SoLuong)" name="product-quantity" style="text-align:center">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="">
+                                                    <a class="product-remove" asp-action="RemoveCart" asp-route-id="@item.SanPham.Id" asp-controller="Home"><i class="tf-ion-android-remove-circle"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                        <tr class="">
+                                            <td class="">
+                                                <span>Tổng tiền: </span>
+                                                <span class="total-price">@ViewBag.Total.ToString("#,##0") VNĐ</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <a asp-action="Pay" asp-controller="Home" class="btn btn-main pull-right">Thanh toán</a>
+                                <a asp-action="RemoveAllCart" asp-controller="Home" class="btn btn-main btn-icon"><i class="tf-ion-android-delete"></i>Xoá tất cả</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

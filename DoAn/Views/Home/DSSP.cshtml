@@ -2,94 +2,83 @@
 
 @{
     ViewData["Title"] = "DSSP";
-    Layout = "~/Views/Shared/_Layout_user.cshtml";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
     var listsp = ViewBag.ListSP;
 }
 
-
-<div class="featured container no-gutter">
-
-
-    <div class="m-xl-n5">
-        @using (Html.BeginForm("DSSP", "Home"))
-        {
-            @Html.TextBox("onhap")
-        }
-
-    </div>
-       
-    <div class="row posts" style="margin-top: 70px">
-
-        @foreach (SanPham item in listsp)
-        {
-            <div id=@item.Id class="item new col-md-4">
-
-                <a asp-action="CTSP" asp-route-id="@item.Id">
-
-                    @*<a href="single-product.html">*@
-                    <div class="featured-item">
-                        <img src="~/images/@item.HinhAnh" width="200" , height="300">
-                        <h4>@item.TenSp</h4>
-                        <h6>@item.Dongia</h6>
-                    </div>
-                    @*</a>*@
-                </a>
-
-            </div>
-        }
-
-
-    </div>
-
-</div>
-
-<div class="page-navigation">
+<section class="page-header">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <ul>
-                    <li class="current-page"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                <div class="content">
+                    <h1 class="page-name">Sản phẩm</h1>
+                    <ol class="breadcrumb">
+                        <li><a asp-action="Index">Trang chủ</a></li>
+                        <li class="active">sản phẩm</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products section">
+    <div class="container">
+        <div class="row">
+            @foreach (SanPham item in listsp)
+            {
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <div class="product-thumb">
+                            <img class="img-responsive" src="~/user/images/shop/products/@item.HinhAnh" alt="product-img" />
+                            <div class="preview-meta">
+                                <ul>
+                                    <li>
+                                        <a asp-action="CTSP" asp-route-id="@item.Id">
+                                            <i class="tf-ion-ios-search-strong"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!"><i class="tf-ion-ios-heart"></i></a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="themgiohang" asp-route-id="@item.Id" asp-controller="Home"><i class="tf-ion-android-cart"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4><a href="product-single.html">@item.TenSp</a></h4>
+                            <p class="price">@item.Dongia₫</p>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="text-center">
+                <ul class="pagination post-pagination">
+                    <li>
+                        <a href="blog-left-sidebar.html">Prev</a>
+                    </li>
+                    <li class="active">
+                        <a href="blog-left-sidebar.html">1</a>
+                    </li>
+                    <li>
+                        <a href="blog-left-sidebar.html">2</a>
+                    </li>
+                    <li>
+                        <a href="blog-left-sidebar.html">3</a>
+                    </li>
+                    <li>
+                        <a href="blog-left-sidebar.html">4</a>
+                    </li>
+                    <li>
+                        <a href="blog-left-sidebar.html">5</a>
+                    </li>
+                    <li>
+                        <a href="blog-left-sidebar.html">Next</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
-</div>
-<div class="subscribe-form">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-heading">
-                    <div class="line-dec"></div>
-                    <h1>Đăng ký PIXIE ngay bây giờ!</h1>
-                </div>
-            </div>
-            <div class="col-md-8 offset-md-2">
-                <div class="main-content">
-                    
-                    <div class="container">
-                        <form id="subscribe" action="" method="get">
-                            <div class="row">
-                                <div class="col-md-7">
-                                    <fieldset>
-                                        <input name="email" type="text" class="form-control" id="email"
-                                               onfocus="if(this.value == 'Your Email...') { this.value = ''; }"
-                                               onBlur="if(this.value == '') { this.value = 'Your Email...';}"
-                                               value="Mail của bạn" required="">
-                                    </fieldset>
-                                </div>
-                                <div class="col-md-5">
-                                    <fieldset>
-                                        <button type="submit" id="form-submit" class="button">Đăng ký ngay!</button>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</section>

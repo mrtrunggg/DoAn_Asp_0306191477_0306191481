@@ -1,20 +1,138 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-    string username;
+﻿@model IEnumerable<DoAn.Models.SanPham>
+@{
+    ViewData["Title"] = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+    var listsp = ViewBag.ListSP;
+
     if (ViewBag.tendangnhap != null)
     {
-        username = ViewBag.tendangnhap;
+        ViewData["Account"] = ViewBag.tendangnhap;
+
     }
-    else {
-        username = "khack";
+    else
+    {
+        ViewData["Account"] = "Tài khoản";
     }
 }
 
-
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p>Ten dang nhap : @username</p>
-    <a asp-controller="TaiKhoans" asp-action="logout" class="btn-danger">logout</a>
+<div class="banner">
+    <img src="~/user/images/slider/slider-1.jpg" alt="" width="100%" />
 </div>
+<section class="product-category section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title text-center">
+                    <h2>Danh mục</h2>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="category-box">
+                    <a href="#!">
+                        <img src="~/user/images/shop/category/Ao.png" alt="" />
+                        <div class="content">
+                            <h3>Áo thun</h3>
+                            @*<p>Shop New Season Clothing</p>*@
+                        </div>
+                    </a>
+                </div>
+                <div class="category-box">
+                    <a href="#!">
+                        <img src="~/user/images/shop/category/Aokhoac.png" alt="" />
+                        <div class="content">
+                            <h3>Áo khoác</h3>
+                            @*<p>Get Wide Range Selection</p>*@
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="category-box">
+                    <a href="#!">
+                        <img src="~/user/images/shop/category/Quan.png" alt="" />
+                        <div class="content">
+                            <h3>Quần</h3>
+                            @*<p>Shop New Season Clothing</p>*@
+                        </div>
+                    </a>
+                </div>
+                <div class="category-box">
+                    <a href="#!">
+                        <img src="~/user/images/shop/category/giay.jpg" alt="" />
+                        <div class="content">
+                            <h3>Giày</h3>
+                            @*<p>Get Wide Range Selection</p>*@
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products section bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="title text-center">
+                <h2>Sản phẩm</h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (SanPham item in listsp)
+            {
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <div class="product-thumb">
+                            <img class="img-responsive" src="~/user/images/shop/products/@item.HinhAnh" alt="product-img" />
+                            <div class="preview-meta">
+                                <ul>
+                                    <li>
+                                        <a asp-action="CTSP" asp-route-id="@item.Id">
+                                            <i class="tf-ion-ios-search-strong"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!"><i class="tf-ion-ios-heart"></i></a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="themgiohang" asp-route-id="@item.Id" asp-controller="Home"><i class="tf-ion-android-cart"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4><a href="product-single.html">@item.TenSp</a></h4>
+                            <p class="price">@item.Dongia₫</p>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="text-center">
+                <ul class="pagination post-pagination">
+                    <li>
+                        <a href="blog-left-sidebar.html">Prev</a>
+                    </li>
+                    <li class="active">
+                        <a href="blog-left-sidebar.html">1</a>
+                    </li>
+                    <li>
+                        <a href="blog-left-sidebar.html">2</a>
+                    </li>
+                    <li>
+                        <a href="blog-left-sidebar.html">3</a>
+                    </li>
+                    <li>
+                        <a href="blog-left-sidebar.html">4</a>
+                    </li>
+                    <li>
+                        <a href="blog-left-sidebar.html">5</a>
+                    </li>
+                    <li>
+                        <a href="blog-left-sidebar.html">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
