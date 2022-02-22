@@ -88,6 +88,7 @@ namespace DoAn.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 _context.Add(sanPham);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

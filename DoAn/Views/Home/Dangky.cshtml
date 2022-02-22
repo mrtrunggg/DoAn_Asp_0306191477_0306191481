@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewData["Title"] = "Dangky";
+
+}
+@model DoAn.Models.TaiKhoan
+<section class="signin-page account">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="block text-center">
+                    <a class="logo" href="index.html">
+                        <img src="images/logo.png" alt="">
+                    </a>
+                    <h2 class="text-center">Create Your Account</h2>
+                    <form class="text-left clearfix" asp-action="Dangky">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+
+                            <input asp-for="HoTen" class="form-control" placeholder="Họ và tên" />
+                            <span asp-validation-for="HoTen" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="TenDangNhap" class="form-control" placeholder="Tên đăng nhập"/>
+                            <span asp-validation-for="TenDangNhap" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="password" asp-for="MatKHau" class="form-control" placeholder="Mật khẩu"/>
+                            <span asp-validation-for="MatKHau" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="email" asp-for="Email" class="form-control" placeholder="Email"/>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            
+                            <input asp-for="DiaChi" class="form-control" placeholder="Địa chỉ"/>
+                            <span asp-validation-for="DiaChi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            
+                            <input asp-for="SoDT" class="form-control" placeholder="Số điện thoại"/>
+                            <span asp-validation-for="SoDT" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            
+                            <input asp-for="SoTK" class="form-control" placeholder="Số tài khoản"/>
+                            <span asp-validation-for="SoTK" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                          
+                            <input type="date" asp-for="NgaySinh" class="form-control" placeholder="Ngày sinh"/>
+                            <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label  class="control-label">Hình đại diện</label>
+                            <input type="file" asp-for="HinhDaiDien" class="form-control" />
+                            <span asp-validation-for="HinhDaiDien" class="text-danger"></span>
+                        </div>
+                      
+                        
+                        <div class="text-center">
+                            <button type="submit" value="Đăng ký" class="btn btn-main text-center">Đăng ký</button>
+                        </div>
+                    </form>
+                    <p class="mt-20">Already hava an account ?<a asp-controller="Home" asp-action="dangnhap"> Đăng nhập</a></p>
+                    <p><a href="forget-password.html"> Forgot your password?</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LoaiTk" class="control-label"></label>
+                <input asp-for="LoaiTk" class="form-control" />
+                <span asp-validation-for="LoaiTk" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenDangNhap" class="control-label"></label>
+                <input asp-for="TenDangNhap" class="form-control" />
+                <span asp-validation-for="TenDangNhap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MatKHau" class="control-label"></label>
+                <input asp-for="MatKHau" class="form-control" />
+                <span asp-validation-for="MatKHau" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoTen" class="control-label"></label>
+                <input asp-for="HoTen" class="form-control" />
+                <span asp-validation-for="HoTen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaChi" class="control-label"></label>
+                <input asp-for="DiaChi" class="form-control" />
+                <span asp-validation-for="DiaChi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoDT" class="control-label"></label>
+                <input asp-for="SoDT" class="form-control" />
+                <span asp-validation-for="SoDT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoTK" class="control-label"></label>
+                <input asp-for="SoTK" class="form-control" />
+                <span asp-validation-for="SoTK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgaySinh" class="control-label"></label>
+                <input asp-for="NgaySinh" class="form-control" />
+                <span asp-validation-for="NgaySinh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HinhDaiDien" class="control-label"></label>
+                <input asp-for="HinhDaiDien" class="form-control" />
+                <span asp-validation-for="HinhDaiDien" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TinhTrang" /> @Html.DisplayNameFor(model => model.TinhTrang)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

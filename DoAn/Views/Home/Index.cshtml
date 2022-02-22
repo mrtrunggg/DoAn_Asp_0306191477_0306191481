@@ -6,12 +6,12 @@
 
     if (ViewBag.tendangnhap != null)
     {
-        ViewData["Account"] = ViewBag.tendangnhap;
+        ViewData["TenTK"] = ViewBag.tendangnhap;
 
     }
     else
     {
-        ViewData["Account"] = "Tài khoản";
+        ViewData["TenTK"] = "Account";
     }
 }
 
@@ -31,7 +31,7 @@
                     <a href="#!">
                         <img src="~/user/images/shop/category/Ao.png" alt="" />
                         <div class="content">
-                            <h3>Áo thun</h3>
+                            
                             @*<p>Shop New Season Clothing</p>*@
                         </div>
                     </a>
@@ -40,7 +40,7 @@
                     <a href="#!">
                         <img src="~/user/images/shop/category/Aokhoac.png" alt="" />
                         <div class="content">
-                            <h3>Áo khoác</h3>
+                            
                             @*<p>Get Wide Range Selection</p>*@
                         </div>
                     </a>
@@ -51,7 +51,7 @@
                     <a href="#!">
                         <img src="~/user/images/shop/category/Quan.png" alt="" />
                         <div class="content">
-                            <h3>Quần</h3>
+                            
                             @*<p>Shop New Season Clothing</p>*@
                         </div>
                     </a>
@@ -60,7 +60,7 @@
                     <a href="#!">
                         <img src="~/user/images/shop/category/giay.jpg" alt="" />
                         <div class="content">
-                            <h3>Giày</h3>
+                            <h2>Giày</h2>
                             @*<p>Get Wide Range Selection</p>*@
                         </div>
                     </a>
@@ -107,31 +107,7 @@
                     </div>
                 </div>
             }
-            <div class="text-center">
-                <ul class="pagination post-pagination">
-                    <li>
-                        <a href="blog-left-sidebar.html">Prev</a>
-                    </li>
-                    <li class="active">
-                        <a href="blog-left-sidebar.html">1</a>
-                    </li>
-                    <li>
-                        <a href="blog-left-sidebar.html">2</a>
-                    </li>
-                    <li>
-                        <a href="blog-left-sidebar.html">3</a>
-                    </li>
-                    <li>
-                        <a href="blog-left-sidebar.html">4</a>
-                    </li>
-                    <li>
-                        <a href="blog-left-sidebar.html">5</a>
-                    </li>
-                    <li>
-                        <a href="blog-left-sidebar.html">Next</a>
-                    </li>
-                </ul>
-            </div>
+            
         </div>
     </div>
 </section>

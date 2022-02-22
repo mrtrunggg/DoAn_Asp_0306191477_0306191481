@@ -68,5 +68,6 @@ namespace DoAn
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
     }
 }

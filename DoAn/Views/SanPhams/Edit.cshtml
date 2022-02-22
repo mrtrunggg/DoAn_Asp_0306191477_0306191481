@@ -50,10 +50,13 @@
                 <span asp-validation-for="LoaiSPId" class="text-danger"></span>
             </div>
             <div class="form-group">
+
                 <label asp-for="HinhAnh" class="control-label"></label>
-                <input asp-for="HinhAnh" class="form-control" />
+                <input value="@Model.HinhAnh"  class="form-control" />
+                <input asp-for="HinhAnh" class="form-control" type="file" />
                 <span asp-validation-for="HinhAnh" class="text-danger"></span>
             </div>
+            
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="TinhTrang" /> @Html.DisplayNameFor(model => model.TinhTrang)

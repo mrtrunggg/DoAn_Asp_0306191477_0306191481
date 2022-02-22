@@ -79,23 +79,28 @@
                             </a>
                             <ul class="dropdown-menu search-dropdown">
                                 <li>
-                                    <form action="post"><input type="search" class="form-control" placeholder="Tìm..."></form>
-                                </li>
+                                    @using (Html.BeginForm("Timkiem", "Home"))
+                                    {
+                                        
+                                            @Html.TextBox("onhap")
+                                        
+                                    }
+                                    </li>
                             </ul>
                         </li><!-- / Search -->
                         <!-- Account -->
                         <li class="dropdown cart-nav dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                                <i class="tf-ion-android-person"></i> @ViewBag.Account
+                                <i class="tf-ion-android-person"></i> @ViewBag.TenTK
                             </a>
                             @{
-                                if (ViewBag.Account == "Tài khoản")
+                                if (ViewBag.TenTK == "Account")
                                 {
                                     <div class="dropdown-menu cart-dropdown">
 
                                         <ul class="text-center cart-buttons">
                                             <li><a asp-controller="Home" asp-action="dangnhap" class="btn btn-small btn-solid-border">Đăng nhập</a></li>
-                                            <li><a href="checkout.html" class="btn btn-small btn-solid-border">Đăng ký</a></li>
+                                            <li><a asp-controller="Home" asp-action="dangky" class="btn btn-small btn-solid-border">Đăng ký</a></li>
                                         </ul>
                                     </div>
                                 }

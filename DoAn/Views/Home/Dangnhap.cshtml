@@ -23,7 +23,7 @@
                             <button type="submit" class="btn btn-main text-center">Đăng nhập</button>
                         </div>
                     </form>
-                    <p class="mt-20">New in this site ?<a href="signin.html"> Create New Account</a></p>
+                    <p class="mt-20">New in this site ?<a asp-controller="Home" asp-action="dangky"> Create New Account</a></p>
                     @{
                         if (ViewBag.ErroMessage == "1")
                         {

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using DoAn.Data;
 
-
 namespace DoAn.Controllers
 {
     public class HomeController : Controller
@@ -30,8 +29,7 @@ namespace DoAn.Controllers
             _context = context;
         }
 
-
-
+       
         
         public IActionResult Index()
         {
@@ -42,8 +40,10 @@ namespace DoAn.Controllers
             ViewBag.ListSP = _context.SanPhams.ToList();
             return View();
         }
-       
-        public IActionResult DSSP(string onhap)
+    
+
+
+        public IActionResult DSSP(int? page  , string onhap)
         {
             if (onhap != null)
             {
@@ -51,14 +51,52 @@ namespace DoAn.Controllers
                 ViewBag.ListSP = a;
                 return View();
             }
-            var sp = _context.SanPhams.ToList();
-            ViewBag.ListSP = sp;
+            int limit = 3;
+            int start;
+            
+            if (page > 0)
+            {
+                page = page;
+               
+            }
+            else
+            {
+                page = 1;
+                
+            }
+            start = (int)(page - 1) * limit;
+
+            ViewBag.pageCurrent = page;
+
+            int totalProduct = _context.SanPhams.Count();
+
+            ViewBag.totalProduct = totalProduct;
+
+            float numberpage = totalProduct / limit;
+            var numberPage = (int)Math.Ceiling(numberpage);
+
+            ViewBag.numberPage = numberPage;
+
+            var dt = (from s in _context.SanPhams select s);
+            var dataProduct = dt.Skip(start).Take(limit);
+
+            ViewBag.ListSP = dataProduct.ToList();
             return View();
 
-            
-        }
 
-        
+
+        }
+        public IActionResult Timkiem(string onhap)
+        {
+            if (onhap != null)
+            {
+                var a = _context.SanPhams.Where(s => s.TenSp.Contains(onhap)).ToList();
+                ViewBag.ListSP = a;
+                return View();
+            }
+            ViewBag.ListSP = _context.SanPhams;
+            return View();
+        }
         public async Task<IActionResult> giohang()
         {
             if (HttpContext.Session.Keys.Contains("TaiKhoanTenDangNhap"))
@@ -139,25 +177,12 @@ namespace DoAn.Controllers
         }
 
         
-        [Route("/UpdateCart/{id:int}", Name = "UpdateCart")]
-        [HttpPost]
-        public IActionResult UpdateCart([FromRoute] int productid, [FromRoute] int quantity)
-        {
-            Giohang cart = _context.Giohangs.FirstOrDefault();
-            var cartitem = _context.Giohangs.Where(p => p.SanPham.Id == productid);
-            foreach (Giohang c in cartitem)
-            {
-                c.SoLuong = quantity;
-            }
-            _context.SaveChanges();
-            return RedirectToAction("Cart");
-        }
-
+  
         public IActionResult Pay()
         {
             
             string username = HttpContext.Session.GetString("TaiKhoanTenDangNhap");
-            ViewBag.taikhoan = _context.TaiKhoan.Where(a => a.TenDangNhap == username).FirstOrDefault();
+            ViewBag.Account = _context.TaiKhoan.Where(a => a.TenDangNhap == username).FirstOrDefault();
             ViewBag.CartsTotal = _context.Giohangs.Include(c => c.SanPham).Include(c => c.TaiKhoan)
                                                 .Where(c => c.TaiKhoan.TenDangNhap == username)
                                                 .Sum(c => c.SoLuong * c.SanPham.Dongia);
@@ -176,7 +201,7 @@ namespace DoAn.Controllers
                 ViewBag.CartsTotal = _context.Giohangs.Include(c => c.SanPham).Include(c => c.TaiKhoan)
                                                     .Where(c => c.TaiKhoan.TenDangNhap == username)
                                                     .Sum(c => c.SoLuong * c.SanPham.Dongia);
-                return View("Pay");
+                return View("pay");
             }
             //Thêm hoá đơn
             DateTime now = DateTime.Now;
@@ -225,7 +250,21 @@ namespace DoAn.Controllers
             return true;
         }
 
+        [HttpPost]
+        [Route("/UpdateCart/{id:int}", Name = "UpdateCart")]
+        public IActionResult UpdateCart( int id, int quantity)
+        {
+            Giohang cart = _context.Giohangs.FirstOrDefault();
+            var cartitem = _context.Giohangs.Where(p => p.SanPham.Id == id);
+            foreach (Giohang c in cartitem)
+            {
+                c.SoLuong = quantity;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("giohang");
+        }
 
+        
         public async Task<IActionResult> CTSP(int? id)
         {
             if (id == null)
@@ -248,8 +287,11 @@ namespace DoAn.Controllers
         {
             return View();
         }
+        public IActionResult Dangky()
+        {
+            return View();
+        }
 
-       
         [HttpPost]
         public async Task<IActionResult> Dangnhap(string TenDangNhap, string MatKHau)
         {
@@ -271,7 +313,22 @@ namespace DoAn.Controllers
             }
 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Dangky([Bind("Id,LoaiTk,TenDangNhap,MatKHau,Email,HoTen,DiaChi,SoDT,SoTK,NgaySinh,HinhDaiDien,TinhTrang")] TaiKhoan taiKhoan)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                taiKhoan.LoaiTk = "user";
+                taiKhoan.TinhTrang = true;
+                _context.Add(taiKhoan);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Dangnhap", "Home");
+            }
+            return View(taiKhoan);
 
+        }
         public IActionResult dangxuat()
         {
             HttpContext.Session.Remove("TaiKhoanId");

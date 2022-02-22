@@ -6,11 +6,11 @@
 
     if (ViewBag.tendangnhap != null)
     {
-        ViewData["Account"] = ViewBag.tendangnhap;
+        ViewData["TenTK"] = ViewBag.tendangnhap;
     }
     else
     {
-        ViewData["Account"] = "Tài khoản";
+        ViewData["TenTK"] = "Account";
     }
     TaiKhoan acc = ViewBag.taikhoan;
 
@@ -39,7 +39,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="block">
                         <div class="product-list">
-                            <form method="post">
+                            
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -52,25 +52,28 @@
                                     <tbody>
                                         @foreach (var item in Model)
                                         {
-                                            <tr class="">
-                                                <td class="">
-                                                    <div class="product-info">
-                                                        <img width="80" src="~/user/images/shop/products/@Html.DisplayFor(modelItem => item.SanPham.HinhAnh)" alt="" />
-                                                        <a asp-action="CTSP" asp-route-id="@item.SanPham.Id">@Html.DisplayFor(modelItem => item.SanPham.TenSp)</a>
+                                        <tr class="">
+                                            <td class="">
+                                                <div class="product-info">
+                                                    <img width="80" src="~/user/images/shop/products/@Html.DisplayFor(modelItem => item.SanPham.HinhAnh)" alt="" />
+                                                    <a asp-action="CTSP" asp-route-id="@item.SanPham.Id">@Html.DisplayFor(modelItem => item.SanPham.TenSp)</a>
+                                                </div>
+                                            </td>
+                                            <td class="">@Html.DisplayFor(modelItem => item.SanPham.Dongia) VNĐ</td>
+                                            
+                                            <td class="">
+                                                <div class="col-md-3">
+                                                    <div class="product-quantity">
+                                                        <form asp-action="UpdateCart" asp-controller="Home" asp-route-id="@item.SanPham.Id">
+                                                            <input class="cart_quantity_input" type="text" name="quantity" value="@Html.DisplayFor(modelItem => item.SoLuong)" autocomplete="off" size="1" style="text-align:center">
+                                                        </form>
                                                     </div>
-                                                </td>
-                                                <td class="">@Html.DisplayFor(modelItem => item.SanPham.Dongia) VNĐ</td>
-                                                <td class="">
-                                                    <div class="col-md-6">
-                                                        <div class="product-quantity-slider">
-                                                            <input id="product-quantity" type="text" value="@Html.DisplayFor(modelItem => item.SoLuong)" name="product-quantity" style="text-align:center">
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <a class="product-remove" asp-action="RemoveCart" asp-route-id="@item.SanPham.Id" asp-controller="Home"><i class="tf-ion-android-remove-circle"></i></a>
-                                                </td>
-                                            </tr>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <a class="product-remove" asp-action="RemoveCart" asp-route-id="@item.SanPham.Id" asp-controller="Home"><i class="tf-ion-android-remove-circle"></i></a>
+                                            </td>
+                                        </tr>
                                         }
                                         <tr class="">
                                             <td class="">
@@ -82,7 +85,7 @@
                                 </table>
                                 <a asp-action="Pay" asp-controller="Home" class="btn btn-main pull-right">Thanh toán</a>
                                 <a asp-action="RemoveAllCart" asp-controller="Home" class="btn btn-main btn-icon"><i class="tf-ion-android-delete"></i>Xoá tất cả</a>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>

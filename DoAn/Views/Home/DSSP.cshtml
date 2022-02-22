@@ -1,7 +1,7 @@
-﻿@model IEnumerable<DoAn.Models.SanPham>
-
+﻿
+@model IEnumerable<DoAn.Models.SanPham>
 @{
-    ViewData["Title"] = "DSSP";
+    ViewData["Title"] = "Danh sách sản phẩm";
     Layout = "~/Views/Shared/_Layout1.cshtml";
     var listsp = ViewBag.ListSP;
 }
@@ -56,27 +56,66 @@
             }
             <div class="text-center">
                 <ul class="pagination post-pagination">
-                    <li>
-                        <a href="blog-left-sidebar.html">Prev</a>
-                    </li>
-                    <li class="active">
-                        <a href="blog-left-sidebar.html">1</a>
-                    </li>
-                    <li>
-                        <a href="blog-left-sidebar.html">2</a>
-                    </li>
-                    <li>
-                        <a href="blog-left-sidebar.html">3</a>
-                    </li>
-                    <li>
-                        <a href="blog-left-sidebar.html">4</a>
-                    </li>
-                    <li>
-                        <a href="blog-left-sidebar.html">5</a>
-                    </li>
-                    <li>
-                        <a href="blog-left-sidebar.html">Next</a>
-                    </li>
+                    @{
+                        int numberPage = ViewBag.numberPage;
+                        int pageCurrent = ViewBag.pageCurrent;
+                        int offset = 2;//number display page
+
+
+                        //config FirstLink
+                        if (pageCurrent > 1)
+                        {
+                            int prevPage = pageCurrent - 1;
+                            var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
+                            <li><a asp-controller="Home" asp-action="DSSP" asp-all-route-data="PrevLink">Prev Link</a></li>
+                        }
+
+                        int from = pageCurrent - offset;
+                        int to = pageCurrent + offset;
+                        if (from <= 0)
+                        {
+                            from = 1;
+                            to = offset * 2;
+                        }
+
+
+                        if (to > numberPage)
+                        {
+                            to = numberPage;
+                        }
+
+                        int i;
+                        for (i = from; i <= to; i++)
+                        {
+                            var parms = new Dictionary<string, string>
+                                {
+                        { "page",i.ToString()}
+                    };
+                            if (pageCurrent == i)
+                            {
+                                <li class="active"><a asp-controller="Home" asp-action="DSSP" asp-all-route-data="parms">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Home" asp-action="DSSP" asp-all-route-data="parms">@i</a></li>
+                            }
+
+                        }
+
+                        if (pageCurrent < numberPage - (to / 2))
+                        {
+                            <li><a>...</a></li>
+                            var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
+                            <li><a asp-controller="Home" asp-action="DSSP" asp-all-route-data="LastLink">Last Link</a></li>
+                        }
+
+                        if (pageCurrent < numberPage)
+                        {
+                            int nextPage = pageCurrent + 1;
+                            var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
+                            <li><a asp-controller="Home" asp-action="DSSP" asp-all-route-data="NextLink">Next Link</a></li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
