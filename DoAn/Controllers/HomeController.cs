@@ -296,7 +296,7 @@ namespace DoAn.Controllers
         public async Task<IActionResult> Dangnhap(string TenDangNhap, string MatKHau)
         {
 
-            TaiKhoan taikhoan = _context.TaiKhoan.Where(a => a.TenDangNhap == TenDangNhap && a.MatKHau == MatKHau && a.LoaiTk != "Admin").FirstOrDefault();
+            TaiKhoan taikhoan = _context.TaiKhoan.Where(a => a.TenDangNhap == TenDangNhap && a.MatKHau == MatKHau && a.LoaiTk != "Admin"&& a.TinhTrang==true).FirstOrDefault();
 
             if (taikhoan != null)
             {

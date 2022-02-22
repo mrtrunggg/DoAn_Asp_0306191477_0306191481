@@ -74,9 +74,13 @@ namespace DoAn.Controllers
             else if (timkiemtheo == "thongtinnguoinhan")
             {
                 return View(_context.HoaDons.Where(s => s.ThongTinNguoiNhan.Contains(onhap)).ToList());
-            }         
-            else
+            }
+            else if (timkiemtheo == "ngaylaphoadon")
+            {
+                return View(_context.HoaDons.Where(s => s.NgayLapHD.ToString().Contains(onhap)).ToList());
+            }else
                 return View(await _context.HoaDons.ToListAsync());
+            
         }
 
         // GET: HoaDons/Details/5

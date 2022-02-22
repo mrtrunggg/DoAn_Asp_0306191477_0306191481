@@ -18,6 +18,7 @@
     @Html.RadioButton("timkiemtheo", "Loaihd")<text>Loại hóa đơn</text>
     @Html.RadioButton("timkiemtheo", "tongtien")<text>Tổng tiền</text>
     @Html.RadioButton("timkiemtheo", "thongtinnguoinhan")<text>Thông tin người nhận</text>
+    @Html.RadioButton("timkiemtheo", "ngaylaphoadon")<text>Ngày lập hóa đơn</text>
     @Html.RadioButton("timkiemtheo", "none", true)<text>None</text>
     <br />
     @Html.TextBox("onhap")
@@ -33,25 +34,25 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaiKhoan)
+                Mã tài khoản
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayLapHD)
+                Ngày lập hóa đơn
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayGiaoHang)
+                Ngày giao hàng
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LoaiHD)
+                Loại hóa đơn
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TongTien)
+                Tổng tiền
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ThongTinNguoiNhan)
+                Thông tin người nhận
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TinhTrang)
+                Tình trạng
             </th>
             <th></th>
         </tr>
