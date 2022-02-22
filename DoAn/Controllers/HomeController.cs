@@ -43,13 +43,11 @@ namespace DoAn.Controllers
     
 
 
-        public IActionResult DSSP(int? page  , string onhap)
+        public IActionResult DSSP(int? page)
         {
-            if (onhap != null)
+            if (HttpContext.Session.Keys.Contains("TaiKhoanTenDangNhap"))
             {
-                var a = _context.SanPhams.Where(s => s.TenSp.Contains(onhap)).ToList();
-                ViewBag.ListSP = a;
-                return View();
+                ViewBag.tendangnhap = HttpContext.Session.GetString("TaiKhoanTenDangNhap");
             }
             int limit = 3;
             int start;
@@ -88,6 +86,10 @@ namespace DoAn.Controllers
         }
         public IActionResult Timkiem(string onhap)
         {
+            if (HttpContext.Session.Keys.Contains("TaiKhoanTenDangNhap"))
+            {
+                ViewBag.tendangnhap = HttpContext.Session.GetString("TaiKhoanTenDangNhap");
+            }
             if (onhap != null)
             {
                 var a = _context.SanPhams.Where(s => s.TenSp.Contains(onhap)).ToList();
@@ -263,10 +265,36 @@ namespace DoAn.Controllers
             _context.SaveChanges();
             return RedirectToAction("giohang");
         }
-
-        
-        public async Task<IActionResult> CTSP(int? id)
+        [HttpPost]
+        [Route("/UpdateCart1/{id:int}", Name = "UpdateCart1")]
+        public IActionResult UpdateCart1(int id, int quantity)
         {
+            if (HttpContext.Session.GetString("TaiKhoanTenDangNhap") != null)
+            {
+                string username = HttpContext.Session.GetString("TaiKhoanTenDangNhap");
+                int accountId = _context.TaiKhoan.FirstOrDefault(a => a.TenDangNhap == username).Id;
+                Giohang cart = _context.Giohangs.FirstOrDefault();
+                var cartitem = _context.Giohangs.Where(p => p.SanPham.Id == id);
+                foreach (Giohang c in cartitem)
+                {
+                    c.SoLuong += quantity;
+                }
+                _context.SaveChanges();
+                return RedirectToAction("giohang");
+            }
+            else
+            {
+                return RedirectToAction("dangnhap", "Home");
+            }
+            
+        }
+
+        public async Task<IActionResult> CTSP( int? id)
+        {
+            if (HttpContext.Session.Keys.Contains("TaiKhoanTenDangNhap"))
+            {
+                ViewBag.tendangnhap = HttpContext.Session.GetString("TaiKhoanTenDangNhap");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -279,7 +307,7 @@ namespace DoAn.Controllers
             {
                 return NotFound();
             }
-
+            
             return View(sanPham);
         }
         

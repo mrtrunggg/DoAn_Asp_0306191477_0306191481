@@ -1,9 +1,17 @@
 ﻿@model DoAn.Models.SanPham
-
 @{
     ViewData["Title"] = "CTSP";
     Layout = "~/Views/Shared/_Layout1.cshtml";
     var listsp = ViewBag.ListSP;
+    Giohang item = ViewBag.ListSL;
+    if (ViewBag.tendangnhap != null)
+    {
+        ViewData["TenTK"] = ViewBag.tendangnhap;
+    }
+    else
+    {
+        ViewData["TenTK"] = "Account";
+    }
 }
 <section class="single-product">
     <div class="container">
@@ -51,19 +59,21 @@
                             }
                         }
                     </div>
-                    <div class="product-quantity">
-                        <span>Số lượng:</span>
-                        <div class="product-quantity-slider">
-                            <input id="product-quantity" type="text" value="1" name="product-quantity">
-                        </div>
-                    </div>
                     <div class="product-category">
                         <span>Loại sản phẩm:</span>
                         <ul>
                             <li><a href="product-single.html">Áo thun</a></li>
                         </ul>
                     </div>
-                    <a asp-action="themgiohang" asp-route-id="@Model.Id" asp-controller="Home" class="btn btn-main mt-20">Thêm giỏ hàng</a>
+                    <div class="product-quantity">
+                        <div class="product-quantity-slider">
+                            <form asp-action="UpdateCart1" asp-controller="Home" asp-route-id="@Model.Id">
+                                <span>Số lượng:</span>
+                                <input class="cart_quantity_input" type="text" name="quantity" value="@Html.DisplayFor(modelItem => item.SoLuong)" autocomplete="off" size="1" style="text-align:center">
+                                <button type="submit" class="btn btn-main mt-20">Thêm giỏ hàng</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

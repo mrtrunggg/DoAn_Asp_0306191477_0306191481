@@ -1,11 +1,17 @@
-﻿
-@model IEnumerable<DoAn.Models.SanPham>
+﻿@model IEnumerable<DoAn.Models.SanPham>
 @{
     ViewData["Title"] = "Danh sách sản phẩm";
     Layout = "~/Views/Shared/_Layout1.cshtml";
     var listsp = ViewBag.ListSP;
+    if (ViewBag.tendangnhap != null)
+    {
+        ViewData["TenTK"] = ViewBag.tendangnhap;
+    }
+    else
+    {
+        ViewData["TenTK"] = "Account";
+    }
 }
-
 <section class="page-header">
     <div class="container">
         <div class="row">
@@ -21,7 +27,6 @@
         </div>
     </div>
 </section>
-
 <section class="products section">
     <div class="container">
         <div class="row">
@@ -60,8 +65,6 @@
                         int numberPage = ViewBag.numberPage;
                         int pageCurrent = ViewBag.pageCurrent;
                         int offset = 2;//number display page
-
-
                         //config FirstLink
                         if (pageCurrent > 1)
                         {
@@ -77,13 +80,10 @@
                             from = 1;
                             to = offset * 2;
                         }
-
-
                         if (to > numberPage)
                         {
                             to = numberPage;
                         }
-
                         int i;
                         for (i = from; i <= to; i++)
                         {
@@ -99,16 +99,13 @@
                             {
                                 <li><a asp-controller="Home" asp-action="DSSP" asp-all-route-data="parms">@i</a></li>
                             }
-
                         }
-
                         if (pageCurrent < numberPage - (to / 2))
                         {
                             <li><a>...</a></li>
                             var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
                             <li><a asp-controller="Home" asp-action="DSSP" asp-all-route-data="LastLink">Last Link</a></li>
                         }
-
                         if (pageCurrent < numberPage)
                         {
                             int nextPage = pageCurrent + 1;
